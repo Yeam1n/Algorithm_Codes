@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int redcutting(int n, int value[]) {
+    int result[n + 1];
+    result[0] = 0;
+
+    for (int i = 1; i <= n; i++) {
+        result[i] = 0;
+        for (int j = 0; j < i; j++) {
+            result[i] = max(result[i], value[j] + result[i - (j + 1)]);
+        }
+    }
+    return result[n];
+}
+
+int main() {
+    int n;
+    cout << "Enter the length of the rod: ";
+    cin >> n;
+
+    int value[n];
+    cout << "Enter the values for each piece length (1 to " << n << "):\n";
+    for (int i = 0; i < n; i++) {
+        cin >> value[i];
+    }
+
+    cout << "Maximum obtainable value is: " << redcutting(n, value) << endl;
+
+    return 0;
+}

@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <algorithm> // for min and max
+
+using namespace std;
+
+class Solution { 
+public:
+    int maxArea(vector<int>& height) {
+        int l = 0, r = height.size() - 1;
+        int ans = 0;
+        while (l < r) {
+            int t = min(height[l], height[r]) * (r - l);
+            ans = max(ans, t);
+            if (height[l] < height[r]) {
+                ++l;
+            } else {
+                --r;
+            }
+        }
+        return ans;
+    }
+};
+
+int main() {
+    vector<int> height = {1,8,6,2,5,4,8,3,7};
+
+    Solution sol;
+    int result = sol.maxArea(height);
+
+    cout << "Maximum water container area: " << result << endl;
+    return 0;
+}
